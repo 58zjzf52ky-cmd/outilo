@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="OUTILO : 20 outils gratuits en ligne pour les calculs, les études et le quotidien. Utilisez-les en français, anglais, espagnol ou allemand.">
+<meta name="keywords" content="outils gratuits, calculatrice, moyenne scolaire, convertisseur, budget, pourcentage, OUTILO">
+<meta name="author" content="OUTILO">
+<meta name="theme-color" content="#2563eb">
+<title>OUTILO – 20 outils gratuits en ligne</title>
+<style>
+:root{--blue:#2563eb;--dark:#14213d;--muted:#64748b;--bg:#f5f7fb;--white:#fff;--line:#e5eaf2}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Inter,Arial,sans-serif;color:var(--dark)}
+header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{max-width:1150px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:27px;font-weight:900;letter-spacing:-1.5px;color:var(--blue)}
+.logo span{color:var(--dark)}
+select,input,button{font:inherit}
+select{padding:10px;border:1px solid var(--line);border-radius:10px;background:white}
+main{max-width:1150px;margin:auto;padding:42px 22px}
+.hero{text-align:center;padding:40px 0 32px}
+.tag{display:inline-block;background:#eaf1ff;color:var(--blue);padding:8px 13px;border-radius:30px;font-size:13px;font-weight:700}
+h1{font-size:clamp(34px,6vw,55px);letter-spacing:-2px;margin:18px 0 12px}
+.hero p{color:var(--muted);font-size:17px;line-height:1.6;max-width:620px;margin:auto}
+.search{display:block;width:min(560px,100%);margin:28px auto 0;padding:16px 19px;border:1px solid var(--line);border-radius:14px;background:#fff;outline:none;box-shadow:0 5px 20px #14213d08}
+.search:focus,input:focus,select:focus{border-color:var(--blue);outline:2px solid #2563eb20}
+.section-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:30px 0 18px}
+.section-title h2{font-size:22px;margin:0}
+.count{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:white;border:1px solid var(--line);border-radius:17px;padding:21px;transition:.2s;box-shadow:0 4px 16px #14213d05}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #14213d0d}
+.emoji{font-size:27px}
+.card h3{font-size:17px;margin:13px 0 7px}
+.card p{font-size:13px;color:var(--muted);line-height:1.5;min-height:39px}
+.open{border:0;background:#edf3ff;color:var(--blue);font-weight:700;padding:10px 14px;border-radius:9px;cursor:pointer}
+.open:hover{background:var(--blue);color:white}
+#toolArea{display:none;background:white;border:1px solid var(--line);border-radius:18px;padding:25px;margin:28px 0;box-shadow:0 8px 30px #14213d08}
+.tooltop{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.tooltop h2{margin:0}
+.close{border:0;background:#f0f3f8;padding:9px 13px;border-radius:9px;cursor:pointer}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:13px;margin:22px 0}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white}
+.field textarea{min-height:110px;resize:vertical}
+.action{background:var(--blue);color:white;border:0;padding:12px 19px;border-radius:10px;font-weight:700;cursor:pointer}
+.action:hover{background:#1d4ed8}
+.result{background:#eff6ff;color:#1745a0;padding:15px;border-radius:11px;margin-top:17px;line-height:1.6;overflow-wrap:anywhere}
+footer{text-align:center;padding:35px 20px;color:var(--muted);font-size:13px;line-height:1.8}
+footer a{color:var(--blue);text-decoration:none}
+.hidden{display:none!important}
+@media(max-width:600px){main{padding:25px 15px}.hero{padding:28px 0}.nav{padding:13px 15px}#toolArea{padding:17px}}
+</style>
+</head>
+<body>
+<header>
+ <div class="nav">
+  <div class="logo">OUTI<span>LO</span>.</div>
+  <select id="language" aria-label="Language">
+   <option value="fr">🇫🇷 Français</option>
+   <option value="en">🇬🇧 English</option>
+   <option value="es">🇪🇸 Español</option>
+   <option value="de">🇩🇪 Deutsch</option>
+  </select>
+ </div>
+</header>
+
+<main>
+ <section class="hero">
+  <span class="tag" id="tag">20 OUTILS GRATUITS</span>
+  <h1 id="headline">Les bons outils, simplement.</h1>
+  <p id="intro">Des outils pratiques pour étudier, calculer et organiser ton quotidien. Gratuitement, sans inscription.</p>
+  <input class="search" id="search" placeholder="🔎 Rechercher un outil..." type="search">
+ </section>
+
+ <div id="toolArea">
+  <div class="tooltop">
+   <h2 id="toolTitle">Outil</h2>
+   <button class="close" id="close">✕</button>
+  </div>
+  <div id="toolContent"></div>
+ </div>
+
+ <div class="section-title">
+  <h2 id="sectionTitle">Tous les outils</h2>
+  <span class="count" id="count"></span>
+ </div>
+ <section class="grid" id="grid"></section>
+</main>
+
+<footer>
+ <strong>OUTILO</strong> – Des outils utiles, accessibles à tous.<br>
+ <span id="footerText">Gratuit • Simple • Sans inscription</span><br>
+ © <span id="year"></span> OUTILO
+</footer>
+
+<script>
+const translations={
+fr:{
+tag:"20 OUTILS GRATUITS",headline:"Les bons outils, simplement.",
+intro:"Des outils pratiques pour étudier, calculer et organiser ton quotidien. Gratuitement, sans inscription.",
+search:"🔎 Rechercher un outil...",section:"Tous les outils",open:"Ouvrir",empty:"Aucun outil trouvé.",
+footer:"Gratuit • Simple • Sans inscription",calculate:"Calculer",result:"Résultat",
+names:["Moyenne scolaire","Gestion de budget","Convertisseur d'unités","Calcul de pourcentage","Calcul de réduction","Générateur de mot de passe","Chronomètre","Compte à rebours","Calculateur d'âge","Calcul de TVA","Liste de tâches","Compteur de mots","Compteur de caractères","Calculateur de pourboire","Partage d'addition","Différence entre dates","Nombre aléatoire","Lancer de dés","Sélecteur de couleur","Convertisseur de texte"],
+descs:["Calcule ta moyenne facilement.","Organise tes dépenses et tes revenus.","Convertis les unités courantes.","Calcule un pourcentage.","Calcule le prix après réduction.","Crée un mot de passe aléatoire.","Mesure le temps écoulé.","Lance un compte à rebours.","Calcule ton âge.","Ajoute ou retire la TVA.","Organise tes tâches.","Compte les mots d'un texte.","Compte les caractères.","Calcule un pourboire.","Partage une addition entre amis.","Calcule le nombre de jours entre deux dates.","Tire un nombre au hasard.","Lance un ou plusieurs dés.","Choisis une couleur.","Change la casse d'un texte."],
+back:"Retour",value:"Valeur",calculateAge:"Date de naissance",amount:"Montant",people:"Nombre de personnes",text:"Ton texte",start:"Démarrer",stop:"Arrêter",reset:"Réinitialiser",copy:"Copier",copied:"Copié !",add:"Ajouter",task:"Nouvelle tâche",done:"Terminé",from:"De",to:"Vers",date1:"Première date",date2:"Deuxième date",rate:"Taux (%)",price:"Prix",quantity:"Quantité",unit:"Unité",generate:"Générer",seconds:"Secondes",minutes:"Minutes",hours:"Heures",calculateBtn:"Calculer",invalid:"Vérifie les valeurs saisies.",noTask:"Aucune tâche pour le moment."
+},
+en:{
+tag:"20 FREE TOOLS",headline:"Useful tools. Made simple.",
+intro:"Practical tools to study, calculate and organize your everyday life. Free, no sign-up.",
+search:"🔎 Search for a tool...",section:"All tools",open:"Open",empty:"No tools found.",
+footer:"Free • Simple • No sign-up",calculate:"Calculate",result:"Result",
+names:["Grade average","Budget planner","Unit converter","Percentage calculator","Discount calculator","Password generator","Stopwatch","Countdown","Age calculator","VAT calculator","To-do list","Word counter","Character counter","Tip calculator","Split the bill","Date difference","Random number","Dice roller","Color picker","Text case converter"],
+descs:["Calculate your average.","Organize income and expenses.","Convert common units.","Calculate a percentage.","Find the discounted price.","Create a random password.","Measure elapsed time.","Start a countdown.","Calculate your age.","Add or remove VAT.","Organize your tasks.","Count words in a text.","Count characters.","Calculate a tip.","Split a bill between people.","Count days between dates.","Pick a random number.","Roll one or more dice.","Choose a color.","Change text case."],
+back:"Back",value:"Value",calculateAge:"Date of birth",amount:"Amount",people:"Number of people",text:"Your text",start:"Start",stop:"Stop",reset:"Reset",copy:"Copy",copied:"Copied!",add:"Add",task:"New task",done:"Done",from:"From",to:"To",date1:"First date",date2:"Second date",rate:"Rate (%)",price:"Price",quantity:"Quantity",unit:"Unit",generate:"Generate",seconds:"Seconds",minutes:"Minutes",hours:"Hours",calculateBtn:"Calculate",invalid:"Please check your values.",noTask:"No tasks yet."
+},
+es:{
+tag:"20 HERRAMIENTAS GRATIS",headline:"Herramientas útiles. Así de fácil.",
+intro:"Herramientas prácticas para estudiar, calcular y organizar tu día. Gratis y sin registro.",
+search:"🔎 Buscar una herramienta...",section:"Todas las herramientas",open:"Abrir",empty:"No se encontraron herramientas.",
+footer:"Gratis • Simple • Sin registro",calculate:"Calcular",result:"Resultado",
+names:["Media escolar","Presupuesto","Conversor de unidades","Porcentajes","Descuentos","Generador de contraseñas","Cronómetro","Cuenta atrás","Calculadora de edad","Calculadora de IVA","Lista de tareas","Contador de palabras","Contador de caracteres","Calculadora de propinas","Dividir la cuenta","Diferencia de fechas","Número aleatorio","Lanzar dados","Selector de color","Convertidor de texto"],
+descs:["Calcula tu promedio.","Organiza tus gastos e ingresos.","Convierte unidades habituales.","Calcula un porcentaje.","Calcula el precio con descuento.","Crea una contraseña aleatoria.","Mide el tiempo.","Inicia una cuenta atrás.","Calcula tu edad.","Calcula el IVA.","Organiza tus tareas.","Cuenta las palabras.","Cuenta los caracteres.","Calcula una propina.","Divide una cuenta.","Cuenta los días entre fechas.","Elige un número al azar.","Lanza uno o varios dados.","Elige un color.","Cambia el formato del texto."],
+back:"Volver",value:"Valor",calculateAge:"Fecha de nacimiento",amount:"Cantidad",people:"Número de personas",text:"Tu texto",start:"Iniciar",stop:"Parar",reset:"Reiniciar",copy:"Copiar",copied:"¡Copiado!",add:"Añadir",task:"Nueva tarea",done:"Hecho",from:"De",to:"A",date1:"Primera fecha",date2:"Segunda fecha",rate:"Tasa (%)",price:"Precio",quantity:"Cantidad",unit:"Unidad",generate:"Generar",seconds:"Segundos",minutes:"Minutos",hours:"Horas",calculateBtn:"Calcular",invalid:"Comprueba los valores.",noTask:"Todavía no hay tareas."
+},
+de:{
+tag:"20 KOSTENLOSE TOOLS",headline:"Nützliche Tools. Ganz einfach.",
+intro:"Praktische Tools zum Lernen, Rechnen und Organisieren. Kostenlos und ohne Anmeldung.",
+search:"🔎 Tool suchen...",section:"Alle Tools",open:"Öffnen",empty:"Keine Tools gefunden.",
+footer:"Kostenlos • Einfach • Ohne Anmeldung",calculate:"Berechnen",result:"Ergebnis",
+names:["Notendurchschnitt","Budgetplaner","Einheitenumrechner","Prozentrechner","Rabattrechner","Passwortgenerator","Stoppuhr","Countdown","Altersrechner","Mehrwertsteuer","Aufgabenliste","Wortzähler","Zeichenzähler","Trinkgeldrechner","Rechnung teilen","Datumsrechner","Zufallszahl","Würfel","Farbauswahl","Text umwandeln"],
+descs:["Berechne deinen Durchschnitt.","Verwalte Einnahmen und Ausgaben.","Rechne Einheiten um.","Berechne Prozente.","Berechne den Rabattpreis.","Erstelle ein Zufallspasswort.","Miss die Zeit.","Starte einen Countdown.","Berechne dein Alter.","Berechne die Mehrwertsteuer.","Organisiere deine Aufgaben.","Zähle Wörter.","Zähle Zeichen.","Berechne Trinkgeld.","Teile eine Rechnung.","Berechne Tage zwischen Daten.","Ziehe eine Zufallszahl.","Wirf einen oder mehrere Würfel.","Wähle eine Farbe.","Ändere die Textschreibweise."],
+back:"Zurück",value:"Wert",calculateAge:"Geburtsdatum",amount:"Betrag",people:"Personenanzahl",text:"Dein Text",start:"Start",stop:"Stopp",reset:"Zurücksetzen",copy:"Kopieren",copied:"Kopiert!",add:"Hinzufügen",task:"Neue Aufgabe",done:"Erledigt",from:"Von",to:"Nach",date1:"Erstes Datum",date2:"Zweites Datum",rate:"Satz (%)",price:"Preis",quantity:"Anzahl",unit:"Einheit",generate:"Erstellen",seconds:"Sekunden",minutes:"Minuten",hours:"Stunden",calculateBtn:"Berechnen",invalid:"Bitte Werte prüfen.",noTask:"Noch keine Aufgaben."
+}
+};
+
+const ids=["average","budget","convert","percent","discount","password","stopwatch","countdown","age","vat","tasks","words","chars","tip","split","dates","random","dice","color","case"];
+const icons=["📚","💰","📏","📊","🏷️","🔐","⏱️","⏳","🎂","🧾","✅","📝","🔤","🍽️","👥","📅","🎲","🎲","🎨","🔡"];
+let lang="fr",timer=null,elapsed=0,remaining=0,tasks=[];
+const $=id=>document.getElementById(id);
+const t=()=>translations[lang];
+
+function render(){
+ document.documentElement.lang=lang;
+ $("tag").textContent=t().tag;$("headline").textContent=t().headline;
+ $("intro").textContent=t().intro;$("search").placeholder=t().search;
+ $("sectionTitle").textContent=t().section;$("footerText").textContent=t().footer;
+ const q=$("search").value.toLowerCase();
+ $("grid").innerHTML="";
+ let n=0;
+ ids.forEach((id,i)=>{
+  if(!(t().names[i]+" "+t().descs[i]).toLowerCase().includes(q))return;
+  n++;
+  const card=document.createElement("article");card.className="card";
+  card.innerHTML=`<div class="emoji">${icons[i]}</div><h3></h3><p></p><button class="open">${t().open} →</button>`;
+  card.querySelector("h3").textContent=t().names[i];
+  card.querySelector("p").textContent=t().descs[i];
+  card.querySelector("button").onclick=()=>openTool(id,i);
+  $("grid").appendChild(card);
+ });
+ $("count").textContent=n+"/20";
+ if(!n)$("grid").innerHTML=`<p>${t().empty}</p>`;
+}
+function field(label,id,type="number",placeholder=""){
+ return `<div class="field"><label for="${id}">${label}</label><input id="${id}" type="${type}" placeholder="${placeholder}"></div>`;
+}
+function button(label="calculateBtn"){return `<button class="action" id="run">${t()[label]||label}</button>`}
+function output(){return `<div class="result" id="result" aria-live="polite">${t().result}</div>`}
+function openTool(id,i){
+ clearInterval(timer);timer=null;
+ $("toolArea").style.display="block";$("toolTitle").textContent=icons[i]+" "+t().names[i];
+ let h="";
+ switch(id){
+ case "average":h=field("Notes séparées par des virgules","a","text","12, 15, 14")+button()+output();break;
+ case "budget":h=field("Revenus","a")+field("Dépenses","b")+button()+output();break;
+ case "convert":h=field(t().value,"a")+`<div class="fields"><div class="field"><label>Conversion</label><select id="unit"><option value="km">km → miles</option><option value="mi">miles → km</option><option value="kg">kg → lb</option><option value="lb">lb → kg</option><option value="c">°C → °F</option><option value="f">°F → °C</option></select></div></div>`+button()+output();break;
+ case "percent":h=field("Valeur","a")+field("Pourcentage (%)","b")+button()+output();break;
+ case "discount":h=field(t().price,"a")+field("Réduction (%)","b")+button()+output();break;
+ case "password":h=field("Longueur (8 à 64)","a")+button("generate")+output();break;
+ case "stopwatch":h=output()+`<button class="action" id="start">${t().start}</button> <button class="close" id="pause">${t().stop}</button> <button class="close" id="reset">${t().reset}</button>`;break;
+ case "countdown":h=field(t().minutes,"a")+button("start")+output()+` <button class="close" id="pause">${t().stop}</button>`;break;
+ case "age":h=field(t().calculateAge,"a","date")+button()+output();break;
+ case "vat":h=field(t().price,"a")+field(t().rate,"b")+button()+output();break;
+ case "tasks":h=field(t().task,"a","text")+button("add")+`<div id="taskList"></div>`;break;
+ case "words":case "chars":h=`<div class="field"><label>${t().text}</label><textarea id="a"></textarea></div>`+output();break;
+ case "tip":h=field(t().amount,"a")+field("Pourboire (%)","b","number","10")+button()+output();break;
+ case "split":h=field(t().amount,"a")+field(t().people,"b")+button()+output();break;
+ case "dates":h=field(t().date1,"a","date")+field(t().date2,"b","date")+button()+output();break;
+ case "random":h=field("Minimum","a")+field("Maximum","b")+button()+output();break;
+ case "dice":h=field(t().quantity,"a")+button("generate")+output();break;
+ case "color":h=`<div class="field"><label>Couleur</label><input id="a" type="color" value="#2563eb"></div>`+output();break;
+ case "case":h=`<div class="field"><label>${t().text}</label><textarea id="a"></textarea></div><button class="action" id="upper">MAJUSCULES</button> <button class="action" id="lower">minuscules</button>`+output();break;
+ }
+ $("toolContent").innerHTML=h;
+ $("toolArea").scrollIntoView({behavior:"smooth",block:"start"});
+ $("run")?.addEventListener("click",()=>runTool(id));
+ $("start")?.addEventListener("click",()=>startTool(id));
+ $("pause")?.addEventListener("click",()=>clearInterval(timer));
+ $("reset")?.addEventListener("click",()=>{clearInterval(timer);elapsed=0;$("result").textContent="00:00.0";});
+ $("upper")?.addEventListener("click",()=>$("result").textContent=$("a").value.toUpperCase());
+ $("lower")?.addEventListener("click",()=>$("result").textContent=$("a").value.toLowerCase());
+ if(id==="words"||id==="chars")$("a").addEventListener("input",()=>runTool(id));
+ if(id==="color")$("a").addEventListener("input",()=>{$("result").textContent=$("a").value;$("result").style.background=$("a").value;});
+ if(id==="tasks")renderTasks();
+}
+function show(s){$("result").textContent=s;}
+function num(id){return Number($(id).value);}
+function runTool(id){
+ const a=$("a")?.value,b=num("b");
+ if(id!=="words"&&id!=="chars"&&id!=="case"&&id!=="color"&&id!=="password"&&id!=="dice"&&id!=="tasks"&&(!a||($( "b")&&!Number.isFinite(b)))){show(t().invalid);return;}
+ switch(id){
+ case "average":{let v=a.split(",").map(Number);if(v.some(x=>!Number.isFinite(x))||!v.length){show(t().invalid);break;}show("Moyenne : "+(v.reduce((x,y)=>x+y,0)/v.length).toFixed(2));break;}
+ case "budget":show("Solde : "+(num("a")-b).toFixed(2));break;
+ case "convert":{let x=num("a"),u=$("unit").value,f={km:x=>x*.621371,mi:x=>x*1.60934,kg:x=>x*2.20462,lb:x=>x/2.20462,c:x=>x*9/5+32,f:x=>(x-32)*5/9};show(f[u](x).toFixed(2));break;}
+ case "percent":show((num("a")*b/100).toFixed(2));break;
+ case "discount":show("Prix final : "+(num("a")*(1-b/100)).toFixed(2));break;
+ case "password":{let n=num("a");if(!Number.isInteger(n)||n<8||n>64){show("Choisis une longueur entre 8 et 64.");break;}let chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%";let arr=new Uint32Array(n);crypto.getRandomValues(arr);show(Array.from(arr,x=>chars[x%chars.length]).join(""));break;}
+ case "age":{let d=new Date(a),now=new Date();if(!a||d>now){show(t().invalid);break;}let age=now.getFullYear()-d.getFullYear();if(new Date(now.getFullYear(),d.getMonth(),d.getDate())>now)age--;show(age+" ans");break;}
+ case "vat":show("TTC : "+(num("a")*(1+b/100)).toFixed(2)+" | TVA : "+(num("a")*b/100).toFixed(2));break;
+ case "words":show(a.trim()?a.trim().split(/\s+/).length+" mots":"0 mot");break;
+ case "chars":show(a.length+" caractères");break;
+ case "tip":show("Pourboire : "+(num("a")*b/100).toFixed(2)+" | Total : "+(num("a")*(1+b/100)).toFixed(2));break;
+ case "split":if(b<1||!Number.isInteger(b)){show(t().invalid);break;}show("Par personne : "+(num("a")/b).toFixed(2));break;
+ case "dates":{let d1=new Date(a),d2=new Date($("b").value);if(!a||!$("b").value){show(t().invalid);break;}show(Math.abs(Math.round((d2-d1)/86400000))+" jours");break;}
+ case "random":if(!Number.isInteger(num("a"))||!Number.isInteger(b)||num("a")>b){show(t().invalid);break;}show(String(Math.floor(Math.random()*(b-num("a")+1))+num("a")));break;
+ case "dice":{let n=num("a");if(!Number.isInteger(n)||n<1||n>20){show("Choisis entre 1 et 20 dés.");break;}let r=Array.from({length:n},()=>Math.floor(Math.random()*6)+1);show(r.join(" + ")+" = "+r.reduce((x,y)=>x+y,0));break;}
+ }
+}
+function startTool(id){
+ if(id==="stopwatch"){
+  if(timer)return;
+  timer=setInterval(()=>{elapsed+=.1;$("result").textContent=(Math.floor(elapsed/60)).toString().padStart(2,"0")+":"+Math.floor(elapsed%60).toString().padStart(2,"0")+"."+Math.floor(elapsed%1*10);},100);
+ }
+ if(id==="countdown"){
+  let m=num("a");if(!Number.isFinite(m)||m<=0){show(t().invalid);return;}
+  clearInterval(timer);remaining=Math.round(m*60);
+  const display=()=>show(Math.floor(remaining/60).toString().padStart(2,"0")+":"+String(remaining%60).padStart(2,"0"));
+  display();timer=setInterval(()=>{remaining--;display();if(remaining<=0){clearInterval(timer);timer=null;show("Terminé !");}},1000);
+ }
+}
+function renderTasks(){
+ $("taskList").innerHTML="";
+ if(!tasks.length){$("taskList").textContent=t().noTask;return;}
+ tasks.forEach((task,i)=>{let row=document.createElement("p");row.textContent=(task.done?"✓ ":"")+task.name+" ";let btn=document.createElement("button");btn.className="close";btn.textContent="×";btn.onclick=()=>{tasks.splice(i,1);renderTasks();};row.appendChild(btn);$("taskList").appendChild(row);});
+}
+$("toolContent").addEventListener("click",e=>{
+ if(e.target.id==="run"&&false)return;
+ if(e.target.id==="run")return;
+});
+$("close").onclick=()=>{clearInterval(timer);$("toolArea").style.display="none";};
+$("language").onchange=e=>{lang=e.target.value;render();};
+$("search").oninput=render;
+$("year").textContent=new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
